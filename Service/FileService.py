@@ -64,27 +64,70 @@ def create_header():
 
 def help():
     '''
-        Permet l'affichage des commandes disponibles dans l'application
+        Allows the display of commands available in the application
     '''
     print()
-    print("  Description des commandes disponible sur Scrap_Game  :")
+    print("  Description of commands available on Scrap_Game  :")
     print("  --------------------------------------------------")
     print()
-    print("    [HELP - help - -H]   =>   Affiche toutes les commandes de l'application.")
+    print("    [HELP - help - -H]   =>   Shows all application commands.")
     print()
-    print("    [LIST - list]        =>   Affiche la liste des sites ciblés pour le scraping.")
+    print("    [LIST - list]        =>   Displays the list of sites targeted for scraping.")
     print()
-    print("    [SCRAP - scrap]      =>   Lance le programme du scrapping, au début il faudra rentre le chemin pour le dossier de sauvegarde ")
-    #print("                  sans le nom du site. Après vient le choix de la source à rentrer si c'est une URL ou un FICHIER")
-    #print("                  - Si URL vous devrez rentrer l'url visée")
-    #print("                  - Si FICHIER vous devrez rentrer le chemin où se trouve le fichier. Seul les fichiers .txt ou .json")
-    #print("                   sont accéptés. Ensuite le script se lance est vous devrez voir défiler les informations, à la fin ")
-    #print("                  du scraping on vous demandera si vous voulez une sauvegarde en fichier .xlsx et en suite vous ")
-    #print("                  pouvez recommencer le scrape avec une URL ou FICHIER différent.")
+    print("    [SCRAP - scrap]      =>   Launch the scrapping program, at the beginning you will have to choose the name of the targeted site and the name of the targeted console. ")
     print()
-    print("    [Admin - admin]      =>   Permet l'administration des données.")
+    print("    [ADMIN - admin]      =>   Allows you to launch the part reserved for the admin.")
     print()
-    print("    [QUIT - quit]        =>   Permet de sortir du programme")
+    print("    [QUIT - quit]        =>   Allows you to exit the program.")
     print()
-    print("    [EXIT - exit]        =>   Permet de sortir du programme")
+    print("    [EXIT - exit]        =>   Allows you to exit the program.")
     print()
+
+
+def get_console(source, site):
+    '''
+        Allows you to recover all the consoles of the targeted site
+    '''
+    list_key = []
+    # Key recovery
+    for k in source[site].keys():
+        list_key.append(k)
+
+    return list_key
+
+
+def get_site(source):
+    '''
+       Allows you to recover all sites that are targeted by scraping 
+    '''
+    list_site = []
+    # Site recovery
+    for k in source.keys():
+        list_site.append(k)
+
+    return list_site
+
+
+def get_urls_by_console(source, site, choice):
+    '''      
+        Allows you to retrieve the site urls according to the choice of console
+    '''
+    
+    dict_url = {}
+    list_keys = []
+    # Keys recovery
+    for k in source[site].keys():
+        list_keys.append(k)
+
+    # Verification of the choice variable
+    if choice == 'all':
+        dict_url = source[site]
+    elif choice in list_keys:
+        dict_url[choice] = source[site][choice]
+    else:
+        print("choice not found")
+
+    return dict_url
+
+
+## Admin part
