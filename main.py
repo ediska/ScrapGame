@@ -1,5 +1,6 @@
 import Service.FileService as f_serve
 import Script.Jeuxvideo as jv
+import Script.Bdiherault as bdi
 
 
 # Initialisation des variables
@@ -21,6 +22,25 @@ while response != "quit" or response != "exit":
             f_serve.help()
         case "-h":
             f_serve.help()
+        case "scrap":
+            # Récupération  des questions
+            site = input("What is the target site ?   ")
+            print("Choice of consoles: console name")
+            print(f_serve.get_console(source_url, site))
+            choice = input("What is your choice ?  ")
+            urls = f_serve.get_urls_by_console(source_url, site, choice)
+            # Switch sur les site appel du script
+            match site:
+                case "jeuxvideo":
+                    jv.start_scrap(urls,site)
+                case "bdiherault":
+                    bdi.start_scrap(urls, site)
+                case "exit":
+                    break
+                case "quit":
+                    break
+                case _:
+                    print("Site inconnu")
         case "quit":
             break
         case "exit":

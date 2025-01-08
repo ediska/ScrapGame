@@ -249,6 +249,7 @@ def start_scrap(path_file, site):
     '''
         Allows the chaining of functions to be able to scrape the site
     '''
+    print("Start of scraping for JEUXVIDEO")
     url_pagination = get_url_pagination(path_file)
     if len(url_pagination) > 0:
         url_games = get_url_games(url_pagination)
