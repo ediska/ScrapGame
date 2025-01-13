@@ -1,14 +1,16 @@
 '''
     File allowing you to retrieve information on video games from the site: www.micromania.com
     The following functions are used to:
-        - get_url_pages() :
-        - get_url_games() :
+        - get_url_pages() : Récuperation des url des pages de la console visée
+        - get_url_games() : Récupération des url des jeux de la console visée
         - get_info_games() :
         - start_scrap() :
 '''
 
+
 from playwright.sync_api import sync_playwright
 from bs4 import BeautifulSoup
+from datetime import date
 import math
 import json
 import os
