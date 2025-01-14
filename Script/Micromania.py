@@ -1,10 +1,10 @@
 '''
     File allowing you to retrieve information on video games from the site: www.micromania.com
     The following functions are used to:
-        - get_url_pages() : Récuperation des url des pages de la console visée
-        - get_url_games() : Récupération des url des jeux de la console visée
-        - get_info_games() :
-        - start_scrap() :
+        - get_url_pages(): Retrieves the urls of pages of each genre for the targeted console
+        - get_url_games(): Retrieves the game urls for each genre for the target console
+        - get_info_games(): Retrieves information about each game by genre for the target console
+        - start_scrap(): allows the sequence of previous functions for scraping the site
 '''
 
 
@@ -17,6 +17,8 @@ import os
 
 
 def get_url_pages(dict_url):
+    print("Retrieving page URLS :")
+    print("---------------------")
     # initialisation des variables
     html=""
     url_tmp = []
@@ -25,6 +27,8 @@ def get_url_pages(dict_url):
     for key_console, link in dict_url.items():
         # Récuperation de la console
         console = key_console
+        print(f"For the console : ")
+        print("------------------")
         # Vérification si la console posséde une url
         if link != "":
             # Utilisation de playwright
@@ -46,8 +50,11 @@ def get_url_pages(dict_url):
             tmp_nbtotal = tmp_nbtotal.split('/')
             # On divise par 20 le nbtotal
             nbtotal = math.ceil(int(tmp_nbtotal[-1]) / 20)
+            print("List of URLS :")
+            print("--------------")
             # On ajout la premiere page
             url_tmp.append(link)
+            print(link)
             # on boucle sur le nb_total pour construire l'url en commence à 2
             for i in range(2,nbtotal+1):
                 # Construction de l'url    
@@ -56,14 +63,16 @@ def get_url_pages(dict_url):
                 # on ajoute l'url dans url_tmp
                 url_tmp.append(url)
         else:
-            print(f"Aucune url de disponible pour la console : {console}")
+            print(f"No URL available for the console : {console}")
         dict_url_pages[console] = url_tmp
         url_tmp = []
-        print(f"La récupération des urls des pages pour {console} est terminée...")
+        print(f"Retrieving page URLs for {console} is complete...")
     return dict_url_pages
 
 
 def get_url_games(dict_url_page):
+    print("Retrieving game URLS :")
+    print("---------------------")
     # Initialisation des variables
     url_tmp = []
     dict_url_games = {}
@@ -71,6 +80,7 @@ def get_url_games(dict_url_page):
     for key_console, links in dict_url_page.items():
         # recuperation de la console
         console = key_console
+        print(f"For the console : {console}")
         # boucle sur les links
         for link in links:
             # utilisation playwrigth
@@ -88,15 +98,18 @@ def get_url_games(dict_url_page):
             soup = BeautifulSoup(html, "html.parser")       
             # recuperation des urls
             blocks_link = soup.find_all("span", {"class" : "url"})
+            print("List of URLS :")
+            print("-------------")
             # boucles sur les urls
             for block in blocks_link:
                 url = block.text
                 # ajout dans list_tmp
                 url_tmp.append(url)
+                print(url)
         # ajout dans le dictionnaire avec key = console
         dict_url_games[console] = url_tmp
         url_tmp = []
-    print(f"La récupération des urls des jeux pour {console} est terminée...")
+    print(f"Retrieving game URLs for {console} is complete...")
     return dict_url_games
 
 
@@ -114,12 +127,12 @@ def get_info_games(dict_url_games, site):
         os.makedirs("../Data/Json/"+site+"/")
         print("Creating the folder for the jsons...")
     else:
-        print("Le dossier existe déjà...")
+        print("The file already exists...")
         
     # boucle sur dict_url_games
     for key_console, links in dict_url_games.items():
         console = key_console
-        print("For the console :  "+console)
+        print(f"For the console :  {console}")
         # boucle sur links
         for link in links:
             # utilisation de playwright

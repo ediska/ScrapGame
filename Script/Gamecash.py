@@ -1,5 +1,5 @@
 '''
-    File allowing you to retrieve information on video games from the site: www.jeuxvideo.com
+    File allowing you to retrieve information on video games from the site: www.gamecash.com
     The following functions are used to:
         - get_url_genres(): Retrieves the genre urls for the target console
         - get_url_pages(): Retrieves the urls of pages of each genre for the targeted console

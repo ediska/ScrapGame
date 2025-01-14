@@ -1,5 +1,5 @@
 '''
-    File allowing you to retrieve information on video games from the site: www.jeuxvideo.com
+    File allowing you to retrieve information on video games from the site: www.bdiherault.com
     The following functions are used to:
       - get_url_pages : Retrieves all video game page URLS for the targeted console
       - get_url_games : Retrieves all video game URLs for the targeted console
