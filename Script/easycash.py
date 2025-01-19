@@ -8,6 +8,7 @@
         - start_scrap(): allows the sequence of previous functions for scraping the site
 '''
 
+
 from playwright.sync_api import sync_playwright
 from bs4 import BeautifulSoup
 from datetime import date
@@ -141,8 +142,8 @@ def get_info_games(dict_games, site):
     cpt = 1
     date_now = date.today().strftime("%d-%m-%Y")
     # Creation du dossier de sauvegarde
-    if not os.path.exists("../Core/Data/Json/"+site+"/"):
-        os.makedirs("../Data/Json/"+site+"/")
+    if not os.path.exists("Data/Json/"+site+"/"):
+        os.makedirs("Data/Json/"+site+"/")
         print("Creating the backup folder successfully...")
     else:
         print("The backup folder already exists...")

@@ -154,12 +154,16 @@ def get_info_games(url_game_dict, site):
         console = key_console
         print("For the console :  "+console)
         # Création des dossiers sauvegarde des images et info game
-        if not os.path.exists("../Data/Img/"+console):
-            os.makedirs("../Core/Data/Img/"+console)
+        if not os.path.exists("Data/Img/"+console):
+            os.makedirs("Data/Img/"+console)
             print("Creating the folder for the imgs...")
-        if not os.path.exists("../Core/Data/Json/"+site+"/"):
-            os.makedirs("../Data/Json/"+site)
+        else :
+            print("The file already exists...")    
+        if not os.path.exists("Data/Json/"+site+"/"):
+            os.makedirs("Data/Json/"+site)
             print("Creating the folder for the jsons...")
+        else :
+            print("The file already exists...")
         # Boucle sur la list des urls
         for link in link_game:
             # Utilisation de playwright
@@ -189,7 +193,7 @@ def get_info_games(url_game_dict, site):
                 extension = url_img_list[-1]
                 name_img = title_img+'.'+extension
                 # Download img
-                f = open("../Core/Data/Img/"+console+"/"+name_img, "wb")
+                f = open("Data/Img/"+console+"/"+name_img, "wb")
                 reponse = requests.get(url_img)
                 f.write(reponse.content)
                 f.close()
@@ -237,7 +241,7 @@ def get_info_games(url_game_dict, site):
             cpt += 1
         # Sauvegarde dans un fichier json
         games[console] = infogame
-        with open("../Data/Json/"+site+"/"+console+"_"+date_now+".json", "w", encoding = 'utf-8') as file_json:
+        with open("Data/Json/"+site+"/"+console+".json", "w", encoding = 'utf-8') as file_json:
             json.dump(games, file_json, ensure_ascii = False, indent = 4)
         infogame = {}
         cpt = 1

@@ -123,8 +123,8 @@ def get_info_games(dict_url_games, site):
     html = ''
     date_now = date.today().strftime("%d-%m-%Y")
     # Création du dossier sauvegarde
-    if not os.path.exists("../Core/Data/Json/"+site+"/"):
-        os.makedirs("../Data/Json/"+site+"/")
+    if not os.path.exists("Data/Json/"+site+"/"):
+        os.makedirs("Data/Json/"+site+"/")
         print("Creating the folder for the jsons...")
     else:
         print("The file already exists...")
