@@ -205,7 +205,7 @@ def get_info_games(dict_url_games, site):
             cpt += 1
         # Sauvegarde dans un fichier json
         games[console] = infogame
-        with open("../Data/Json/"+site+"/"+console+"_"+date_now+".json", "w", encoding = 'utf-8') as file_json:
+        with open("Data/Json/"+site+"/"+console+"_"+date_now+".json", "w", encoding = 'utf-8') as file_json:
             json.dump(games, file_json, ensure_ascii = False, indent = 4)
         infogame = {}
         cpt = 1
